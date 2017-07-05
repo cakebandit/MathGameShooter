@@ -1,10 +1,11 @@
 #include "SFMLHeader.h"
 #include "mathShip.h"
 #include "mainship.h"
+#include <iostream>
 #include <cstdlib>
 
-mathShip::mathShip(){
-	position.y = rand() % 400;
+mathShip::mathShip(int startY){
+	position.y = startY;
 	position.x = 600;
 
 	mathShipPlaceholder.setSize(Vector2f(60, 25));
@@ -24,4 +25,12 @@ FloatRect mathShip::getPosition()
 
 RectangleShape mathShip::getShape() {
 	return mathShipPlaceholder;
+}
+
+void mathShip::movementMath() {
+	position.x = position.x - 1;
+}
+
+void mathShip::Update() {
+	mathShipPlaceholder.setPosition(position);
 }

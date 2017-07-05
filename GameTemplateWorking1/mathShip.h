@@ -5,13 +5,14 @@ using namespace sf;
 
 class mathShip {
 private:
-	Vector2f position;
 
 	RectangleShape mathShipPlaceholder;
 	float movespeed = 5;
 
 public:
-	mathShip();
+	mathShip(int StartY);
+	Vector2f position;
+
 	int mathEquation1;
 	int mathEquation2;
 	int answer;
@@ -19,7 +20,11 @@ public:
 	FloatRect getPosition();
 
 	RectangleShape getShape();
+
+	void movementMath();
 	
 	int mathEquationGuess();
+
+	void Update();
 	
 };

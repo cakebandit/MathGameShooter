@@ -17,6 +17,7 @@ mainShip::mainShip(float startX, float startY) {
 	shipPointer.setPosition(position.x - 50, position.y - 10);
 }
 
+
 FloatRect mainShip::getPosition()
 {
 	return shipPlaceholder.getGlobalBounds();

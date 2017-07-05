@@ -1,6 +1,9 @@
 #include "SFMLHeader.h"
 #include "mainship.h"
+#include "mathShip.h"
 #include <iostream>
+#include <list>
+#include <random>
 
 
 using namespace sf;
@@ -11,8 +14,27 @@ int main() {
 
 	int windowHeight = 600;
 
-	mainShip mainShip(50, 230);
+	int mathShipOnScreen;
 
+	//text on screen management
+	Font font;
+	font.loadFromFile("C:/Windows/Fonts/arial.ttf");
+
+	Text enteredText;
+	enteredText.setFont(font);
+	enteredText.setCharacterSize(20);
+
+	std::string str;
+
+
+	//random declaration
+	std::default_random_engine mathShipRandom;
+	std::uniform_int_distribution<int> distribution(0, 450);
+
+	//setting enemy and main ship position
+	mainShip mainShip(50, 230);
+	mathShip mathShip(distribution(mathShipRandom));
+	
 	//creating a window instance
 	RenderWindow window(VideoMode(windowHeight, windowWidth), "Maths Game");
 
@@ -24,6 +46,25 @@ int main() {
 				window.close();
 				break;
 			}
+			if (event.type == Event::TextEntered) {
+				if (event.text.unicode == '\b') { // handle backspace explicitly
+					str.erase(str.size() - 1, 1);
+				}
+				if (event.text.unicode == '\r') {
+					std::cout << "okay";
+				}
+				else if (str.size() < 5) {
+					if (event.text.unicode < 60) {
+						str += static_cast<char>(event.text.unicode);
+					}
+				}
+				
+
+				
+				enteredText.setString(str);
+				std::cout << str.size();
+			}
+
 		}
 		//setting the frame rate limit
 		window.setFramerateLimit(60);
@@ -38,6 +79,9 @@ int main() {
 
 		window.draw(mainShip.getPointerShape());
 		window.draw(mainShip.getShape());
+		window.draw(mathShip.getShape());
+		window.draw(enteredText);
+		
 
 		//Keyboard movements
 		if (Keyboard::isKeyPressed(Keyboard::Up)) {
@@ -47,17 +91,14 @@ int main() {
 		if (Keyboard::isKeyPressed(Keyboard::Down)) {
 			mainShip.moveDown();
 		}
+		
+		enteredText.setPosition(mainShip.position.x, mainShip.position.y - 30);
 
-		if (event.type == sf::Event::EventType::KeyPressed) {
-			int currentPressedKey = event.key.code;
-			if (currentPressedKey == ) {
-				std::cout << currentPressedKey;
-			}
-		}
-
+		mathShip.movementMath();
 		window.display();
 
 		mainShip.Update();
+		mathShip.Update();
 	}
 
 }

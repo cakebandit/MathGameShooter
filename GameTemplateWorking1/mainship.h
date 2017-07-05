@@ -14,7 +14,9 @@ private:
 public:
 
 	mainShip(float startX, float startY);
+	
 	Vector2f position;
+
 	FloatRect getPosition();
 	FloatRect getPointerPosition();
 
