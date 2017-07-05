@@ -8,7 +8,7 @@ private:
 	Vector2f position;
 
 	RectangleShape mathShipPlaceholder;
-	float movespeed = 5;
+	float movespeed = 3;
 
 public:
 	mathShip();
@@ -21,5 +21,7 @@ public:
 	RectangleShape getShape();
 	
 	int mathEquationGuess();
+
+	int spawnMath();
 	
 };

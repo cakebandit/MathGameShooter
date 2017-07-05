@@ -1,5 +1,6 @@
 #include "SFMLHeader.h"
 #include "mainship.h"
+#include "mathShip.h"
 #include <iostream>
 
 
@@ -48,12 +49,10 @@ int main() {
 			mainShip.moveDown();
 		}
 
-		if (event.type == sf::Event::EventType::KeyPressed) {
-			int currentPressedKey = event.key.code;
-			if (currentPressedKey == ) {
-				std::cout << currentPressedKey;
-			}
+		while (mainShip.position.y == mathShip.position.y) {
+
 		}
+		
 
 		window.display();
 

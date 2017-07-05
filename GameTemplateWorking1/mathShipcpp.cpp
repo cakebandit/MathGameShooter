@@ -22,6 +22,12 @@ FloatRect mathShip::getPosition()
 	return mathShipPlaceholder.getGlobalBounds();
 }
 
+Text question = (mathShip.mathEquation1 +)
+
 RectangleShape mathShip::getShape() {
 	return mathShipPlaceholder;
+}
+
+int spawnMath(mathShip mathShip) {
+
 }
