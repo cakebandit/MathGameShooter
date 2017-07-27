@@ -17,6 +17,7 @@ mainShip::mainShip(float startX, float startY) {
 	shipPointer.setPosition(position.x - 50, position.y - 10);
 }
 
+
 FloatRect mainShip::getPosition()
 {
 	return shipPlaceholder.getGlobalBounds();
@@ -61,4 +62,10 @@ void mainShip::Update() {
 	shipPointer.setPosition(position.x, position.y + 10);
 
 	//std::cout << position.y;
+}
+
+void mainShip::fire(int mathShipPosY, int mainShipPosY) {
+	if (mathShipPosY == mainShipPosY) {
+
+	}
 }

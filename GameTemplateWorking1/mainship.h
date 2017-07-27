@@ -7,6 +7,8 @@ class mainShip {
 private:
 
 	float movespeed = 10;
+	Texture mainShipTexture;
+	Sprite mainShipSprite;
 	
 	RectangleShape shipPlaceholder;
 	RectangleShape shipPointer;
@@ -14,7 +16,9 @@ private:
 public:
 
 	mainShip(float startX, float startY);
+	
 	Vector2f position;
+
 	FloatRect getPosition();
 	FloatRect getPointerPosition();
 
@@ -26,5 +30,6 @@ public:
 	void moveUp();
 	void moveDown();
 
+	void fire(int mathShipPosY, int mainShipPosY);
 	void Update();
 };

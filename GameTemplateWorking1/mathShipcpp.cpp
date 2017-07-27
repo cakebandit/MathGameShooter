@@ -1,10 +1,11 @@
 #include "SFMLHeader.h"
 #include "mathShip.h"
 #include "mainship.h"
+#include <iostream>
 #include <cstdlib>
 
-mathShip::mathShip(){
-	position.y = rand() % 400;
+mathShip::mathShip(int startY){
+	position.y = startY;
 	position.x = 600;
 
 	mathShipPlaceholder.setSize(Vector2f(60, 25));
@@ -15,6 +16,9 @@ mathShip::mathShip(){
 	int answer = mathEquation1 * mathEquation2;
 
 	mathShipPlaceholder.setPosition(position);
+
+	mathShip::Update();
+	mathShip::movementMath();
 }
 
 FloatRect mathShip::getPosition()
@@ -22,12 +26,15 @@ FloatRect mathShip::getPosition()
 	return mathShipPlaceholder.getGlobalBounds();
 }
 
-Text question = (mathShip.mathEquation1 +)
-
 RectangleShape mathShip::getShape() {
 	return mathShipPlaceholder;
 }
 
-int spawnMath(mathShip mathShip) {
-
+void mathShip::movementMath() {
+	position.x = position.x - 1;
 }
+
+void mathShip::Update() {
+	mathShipPlaceholder.setPosition(position);
+}
+
