@@ -63,3 +63,9 @@ void mainShip::Update() {
 
 	//std::cout << position.y;
 }
+
+void mainShip::fire(int mathShipPosY, int mainShipPosY) {
+	if (mathShipPosY == mainShipPosY) {
+
+	}
+}

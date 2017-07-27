@@ -16,6 +16,9 @@ mathShip::mathShip(int startY){
 	int answer = mathEquation1 * mathEquation2;
 
 	mathShipPlaceholder.setPosition(position);
+
+	mathShip::Update();
+	mathShip::movementMath();
 }
 
 FloatRect mathShip::getPosition()
@@ -34,3 +37,4 @@ void mathShip::movementMath() {
 void mathShip::Update() {
 	mathShipPlaceholder.setPosition(position);
 }
+

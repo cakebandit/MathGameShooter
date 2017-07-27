@@ -7,6 +7,8 @@ class mainShip {
 private:
 
 	float movespeed = 10;
+	Texture mainShipTexture;
+	Sprite mainShipSprite;
 	
 	RectangleShape shipPlaceholder;
 	RectangleShape shipPointer;
@@ -28,5 +30,6 @@ public:
 	void moveUp();
 	void moveDown();
 
+	void fire(int mathShipPosY, int mainShipPosY);
 	void Update();
 };
