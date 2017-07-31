@@ -8,18 +8,22 @@
 
 using namespace sf;
 
+
+
 int main() {
 
 	int windowWidth = 480;
 
 	int windowHeight = 600;
 
-	int mathShipOnScreen;
-	int respawn;
+	Clock clock;
+	Time time1;
+	
 
 	//text on screen management
 	Font font;
 	font.loadFromFile("C:/Windows/Fonts/arial.ttf");
+
 
 	Texture backgroundTexture;
 	if (!backgroundTexture.loadFromFile("background.jpg")) {
@@ -33,18 +37,17 @@ int main() {
 
 	std::string str;
 
+	
+
 	//random declaration
 	std::default_random_engine mathShipRandom;
 	std::uniform_int_distribution<int> distribution(0, 450);
+	std::uniform_int_distribution<int> randomnumber(463, 500);
 
 	//setting enemy and main ship position
 	mainShip mainShip(50, 230);
 
 	std::list<mathShip> listMathShip;
-	for (int i = 0; i < 10; i++) {
-		mathShip ms(distribution(mathShipRandom));
-		listMathShip.push_front(ms);
-	}
 	
 	
 	//creating a window instance
@@ -63,6 +66,7 @@ int main() {
 				if (event.text.unicode == '\b') { // handle backspace explicitly
 					str.erase(str.size() - 1, 1);
 				}
+
 				else if (event.text.unicode == '\r') {
 					std::cout << "okay";
 					mainShip.answer = std::stoi(str);
@@ -80,6 +84,21 @@ int main() {
 
 		}
 		
+		time1 += clock.getElapsedTime();
+
+		if (randomnumber(mathShipRandom) < time1.asSeconds()) {
+			std::cout << "meme";
+			clock.restart();
+			time1 = time1 - time1;
+
+			for (int i = 0; i < 1; i++) {
+				mathShip ms(distribution(mathShipRandom));
+				listMathShip.push_front(ms);
+				i = 0;
+			}
+			
+			
+		}
 		
 
 		//setting the frame rate limit
@@ -104,6 +123,7 @@ int main() {
 		
 
 		//Keyboard movements
+		
 		if (Keyboard::isKeyPressed(Keyboard::Up)) {
 			mainShip.moveUp();
 		}
@@ -111,12 +131,11 @@ int main() {
 		if (Keyboard::isKeyPressed(Keyboard::Down)) {
 			mainShip.moveDown();
 		}
-		
+
 		enteredText.setPosition(mainShip.position.x, mainShip.position.y - 30);
 		for (mathShip& ms : listMathShip) {
 			ms.movementMath();
 		}
-		
 		
 		window.display();
 
