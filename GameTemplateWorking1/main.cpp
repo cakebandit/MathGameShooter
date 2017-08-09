@@ -2,16 +2,15 @@
 #include "mainship.h"
 #include "mathShip.h"
 #include <iostream>
+#include <string>
+#include <sstream>
 #include <list>
 #include <random>
 
-
 using namespace sf;
 
-
-
 int main() {
-
+	
 	int windowWidth = 480;
 
 	int windowHeight = 600;
@@ -19,6 +18,7 @@ int main() {
 	Clock clock;
 	Time time1;
 	
+
 
 	//text on screen management
 	Font font;
@@ -96,11 +96,8 @@ int main() {
 				listMathShip.push_front(ms);
 				i = 0;
 			}
-			
-			
 		}
 		
-
 		//setting the frame rate limit
 		window.setFramerateLimit(60);
 
@@ -116,7 +113,8 @@ int main() {
 		window.draw(mainShip.getPointerShape());
 		window.draw(mainShip.getShape());
 		for (mathShip& ms : listMathShip) {
-			window.draw(ms.getShape());
+			//window.draw(ms.getShape());
+			window.draw(ms.getText());
 		}
 		
 		window.draw(enteredText);
@@ -124,15 +122,10 @@ int main() {
 
 		//Keyboard movements
 		
-		if (Keyboard::isKeyPressed(Keyboard::Up)) {
-			mainShip.moveUp();
-		}
+		mainShip.moveUp();
+		mainShip.moveDown();
 
-		if (Keyboard::isKeyPressed(Keyboard::Down)) {
-			mainShip.moveDown();
-		}
-
-		enteredText.setPosition(mainShip.position.x, mainShip.position.y - 30);
+		enteredText.setPosition(mainShip.position.x - 5, mainShip.position.y - 50);
 		for (mathShip& ms : listMathShip) {
 			ms.movementMath();
 		}
@@ -142,9 +135,11 @@ int main() {
 		mainShip.Update();
 		for (mathShip& ms : listMathShip) {
 			ms.Update();
+			ms.outOfBounds(ms.position);
 		}
 		
-		
+	
 	}
 
 }
+

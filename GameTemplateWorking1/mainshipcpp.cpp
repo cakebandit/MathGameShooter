@@ -49,17 +49,21 @@ RectangleShape mainShip::getPointerShape()
 
 
 void mainShip::moveUp() {
-	if (position.y >= 5) {
-		position.y = position.y - movespeed;
+	if (Keyboard::isKeyPressed(Keyboard::Up)) {
+		if (position.y >= 5) {
+			position.y = position.y - movespeed;
+		}
 	}
+	
 	
 }
 
 void mainShip::moveDown() {
-	if (position.y <= 451) {
-		position.y = position.y + movespeed;
+	if (Keyboard::isKeyPressed(Keyboard::Down)) {
+		if (position.y <= 451) {
+			position.y = position.y + movespeed;
+		}
 	}
-	
 	
 }
 
@@ -71,8 +75,8 @@ void mainShip::Update() {
 	//std::cout << position.y;
 }
 
-void mainShip::fire(int mathShipPosY, int mainShipPosY) {
-	if (mathShipPosY == mainShipPosY) {
-
-	}
+void mainShip::fire(int mathShipPosY, int mainShipPosY, int answer, bool inbounds) {
+	//if (mathShipPosY == mainShipPosY && ) {
+		//
+	//}
 }
