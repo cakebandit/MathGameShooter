@@ -49,5 +49,8 @@
     <Image Include="background.jpg">
       <Filter>Source Files</Filter>
     </Image>
+    <Image Include="D:\Downloads\mine.png">
+      <Filter>Source Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -9,11 +9,14 @@ using namespace sf;
 class mathShip {
 private:
 
-	Text question;
-	RectangleShape mathShipPlaceholder;
+	
+
 	float movespeed = 5;
 
 public:
+	Texture mathShipTexture;
+	Sprite mathShipSprite;
+
 	mathShip(int StartY);
 	Vector2f position;
 
@@ -21,17 +24,15 @@ public:
 	int mathEquation2;
 	int answer;
 
+	Text question;
+
 	bool outOfBounds(Vector2f mathposition);
 
-	FloatRect getPosition();
-
-	RectangleShape getShape();
+	Sprite getSprite();
 
 	Text getText();
 
 	void movementMath();
-	
-	int mathEquationGuess();
 
 	void Update();
 	

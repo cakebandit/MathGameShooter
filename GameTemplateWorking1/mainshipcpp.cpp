@@ -13,7 +13,7 @@ mainShip::mainShip(float startX, float startY) {
 	shipPointer.setSize(Vector2f(800, 1));
 
 	if (!mainShipTexture.loadFromFile("spaceship2.png")) {
-		std::cout << "didntload";
+		std::cout << "didntload spaceshiptexture";
 	}
 	mainShipSprite.setTexture(mainShipTexture);
 	mainShipSprite.setRotation(90);
@@ -36,7 +36,7 @@ FloatRect mainShip::getPointerPosition()
 }
 
 //gets ship shape for displaying
-Sprite mainShip::getShape()
+Sprite mainShip::getSprite()
 {
 	return mainShipSprite;
 }

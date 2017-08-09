@@ -10,48 +10,36 @@ mathShip::mathShip(int startY){
 	position.y = startY;
 	position.x = 600;
 
-	mathShipPlaceholder.setSize(Vector2f(60, 25));
+	if (!mathShipTexture.loadFromFile("mine.png")) {
+		std::cout << "didntload minetexture";
+	}
+
+	mathShipSprite.setTexture(mathShipTexture);
+	//mathShipSprite.setScale(0.2, 0.2);
 	
 	int mathEquation1 = (rand() % 10);
 	int mathEquation2 = (rand() % 9);
 
 	int answer = mathEquation1 + mathEquation2;
 
-	Text question;
-	Font font;
-
-	if (!font.loadFromFile("C:/Windows/Fonts/arial.ttf"))
-	{
-		std::cout << "didnt work";
-	}
-
-	//std::string s = std::to_string(mathEquation1) + " + " + std::to_string(mathEquation2);
-	std::string s = "meme";
+	std::string s = std::to_string(mathEquation1) + " + " + std::to_string(mathEquation2);
 
 	question.setString(s);
-	question.setCharacterSize(20);
+	question.setCharacterSize(15);
 	question.setFillColor(Color::White);
 	question.setStyle(sf::Text::Regular);
 
-	mathShipPlaceholder.setPosition(position);
+	mathShipSprite.setPosition(position);
 	question.setPosition(position);
-
-	mathShip::movementMath();
-}
-
-FloatRect mathShip::getPosition()
-{
-	return mathShipPlaceholder.getGlobalBounds(), question.getGlobalBounds();
-}
-
-RectangleShape mathShip::getShape() {
-	return mathShipPlaceholder;
 }
 
 Text mathShip::getText() {
-	std::cout << "william: " , question.getString();
 	return question;
-	
+}
+
+Sprite mathShip::getSprite()
+{
+	return mathShipSprite;
 }
 
 bool mathShip::outOfBounds(Vector2f mathposition) {
@@ -62,12 +50,12 @@ bool mathShip::outOfBounds(Vector2f mathposition) {
 }
 
 void mathShip::movementMath() {
-	position.x = position.x - 1;
+	position.x = position.x - 0.5;
 }
 
 void mathShip::Update() {
-	mathShipPlaceholder.setPosition(position);
-	question.setPosition(position);
+	mathShipSprite.setPosition(position);
+	question.setPosition(position.x, position.y - 20);
 }
 
 

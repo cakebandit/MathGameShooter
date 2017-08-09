@@ -22,7 +22,7 @@ public:
 	FloatRect getPosition();
 	FloatRect getPointerPosition();
 
-	Sprite getShape();
+	Sprite getSprite();
 	RectangleShape getPointerShape();
 
 	int answer;

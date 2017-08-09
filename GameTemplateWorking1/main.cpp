@@ -41,7 +41,7 @@ int main() {
 
 	//random declaration
 	std::default_random_engine mathShipRandom;
-	std::uniform_int_distribution<int> distribution(0, 450);
+	std::uniform_int_distribution<int> distribution(0, 400);
 	std::uniform_int_distribution<int> randomnumber(463, 500);
 
 	//setting enemy and main ship position
@@ -111,9 +111,12 @@ int main() {
 
 		window.draw(background);
 		window.draw(mainShip.getPointerShape());
-		window.draw(mainShip.getShape());
+		window.draw(mainShip.getSprite());
 		for (mathShip& ms : listMathShip) {
-			//window.draw(ms.getShape());
+			ms.mathShipSprite.setTexture(ms.mathShipTexture);
+			window.draw(ms.getSprite());
+
+			ms.question.setFont(font);
 			window.draw(ms.getText());
 		}
 		
