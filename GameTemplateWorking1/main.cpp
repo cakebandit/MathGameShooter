@@ -84,6 +84,7 @@ int main() {
 
 		}
 		
+		
 		time1 += clock.getElapsedTime();
 
 		if (randomnumber(mathShipRandom) < time1.asSeconds()) {
@@ -97,6 +98,12 @@ int main() {
 				i = 0;
 			}
 		}
+
+		//for (mathShip& ms : listMathShip) {
+			//if (mainShip.position.y == ms.position.y) {
+				
+			//}
+		//}
 		
 		//setting the frame rate limit
 		window.setFramerateLimit(60);
