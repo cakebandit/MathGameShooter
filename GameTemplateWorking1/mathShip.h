@@ -8,9 +8,6 @@ using namespace sf;
 
 class mathShip {
 private:
-
-	
-
 	float movespeed = 5;
 
 public:
@@ -27,6 +24,7 @@ public:
 	Text question;
 
 	bool outOfBounds(Vector2f mathposition);
+	bool isAlive;
 
 	Sprite getSprite();
 

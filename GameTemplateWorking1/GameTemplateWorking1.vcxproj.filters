@@ -19,6 +19,9 @@
     <Filter Include="Source Files\Ships">
       <UniqueIdentifier>{3ecbd40f-7e7f-4cfc-bbb5-6fe0cea8bf63}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\NewFilter1">
+      <UniqueIdentifier>{62602cd9-3d01-4717-8d09-84de8b0f5e8e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -30,6 +33,9 @@
     <ClCompile Include="mathShipcpp.cpp">
       <Filter>Source Files\Ships</Filter>
     </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SFMLHeader.h">
@@ -40,6 +46,9 @@
     </ClInclude>
     <ClInclude Include="mathShip.h">
       <Filter>Header Files\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

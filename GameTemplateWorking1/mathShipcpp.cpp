@@ -14,6 +14,8 @@ mathShip::mathShip(int startY){
 		std::cout << "didntload minetexture";
 	}
 
+	isAlive = true;
+
 	mathShipSprite.setTexture(mathShipTexture);
 	//mathShipSprite.setScale(0.2, 0.2);
 	
