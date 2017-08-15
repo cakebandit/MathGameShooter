@@ -19,6 +19,8 @@ mathShip::mathShip(int startY){
 	}
 	isAlive = true;
 
+	isAlive = true;
+
 	mathShipSprite.setTexture(mathShipTexture);
 
 	std::string s = std::to_string(mathEquation1) + " + " + std::to_string(mathEquation2);
