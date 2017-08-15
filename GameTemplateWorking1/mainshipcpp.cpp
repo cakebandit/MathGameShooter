@@ -19,6 +19,7 @@ mainShip::mainShip(float startX, float startY) {
 	mainShipSprite.setRotation(90);
 	mainShipSprite.setScale(0.3, 0.3);
 	
+	float movespeed = 5;
 
 	mainShipSprite.setPosition(position);
 	shipPointer.setPosition(position.x - 50, position.y - 10);

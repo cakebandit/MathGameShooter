@@ -157,11 +157,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainshipcpp.cpp" />
     <ClCompile Include="mathShipcpp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="mainship.h" />
     <ClInclude Include="mathShip.h" />
     <ClInclude Include="SFMLHeader.h" />

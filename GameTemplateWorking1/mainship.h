@@ -6,7 +6,7 @@ using namespace sf;
 class mainShip {
 private:
 
-	float movespeed = 10;
+	float movespeed = 3;
 	Texture mainShipTexture;
 	Sprite mainShipSprite;
 	

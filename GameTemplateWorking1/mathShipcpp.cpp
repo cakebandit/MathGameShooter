@@ -3,24 +3,23 @@
 #include "mainship.h"
 #include <iostream>
 #include <string>
+#include <time.h>
 #include <sstream>
+#include <random>
 #include <cstdlib>
 
 mathShip::mathShip(int startY){
 	position.y = startY;
 	position.x = 600;
 
+	srand(time(NULL));
+
 	if (!mathShipTexture.loadFromFile("mine.png")) {
 		std::cout << "didntload minetexture";
 	}
+	isAlive = true;
 
 	mathShipSprite.setTexture(mathShipTexture);
-	//mathShipSprite.setScale(0.2, 0.2);
-	
-	int mathEquation1 = (rand() % 10);
-	int mathEquation2 = (rand() % 9);
-
-	int answer = mathEquation1 + mathEquation2;
 
 	std::string s = std::to_string(mathEquation1) + " + " + std::to_string(mathEquation2);
 
@@ -35,6 +34,16 @@ mathShip::mathShip(int startY){
 
 Text mathShip::getText() {
 	return question;
+}
+
+int mathShip::answerquestion(int mathShipQuestion) {
+	std::cout << mathEquation1;
+	if (answer == mathShipQuestion) {
+		
+		return isAlive = false;
+	}
+	else
+		return isAlive = true;
 }
 
 Sprite mathShip::getSprite()
