@@ -30,6 +30,5 @@ public:
 	void moveUp();
 	void moveDown();
 
-	void fire(int mathShipPosY, int mainShipPosY, int answer, bool inbounds);
 	void Update();
 };

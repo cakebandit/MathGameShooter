@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <time.h>
+#include <list>
 #include <sstream>
 #include <random>
 #include <cstdlib>
@@ -38,10 +39,10 @@ Text mathShip::getText() {
 	return question;
 }
 
-int mathShip::answerquestion(int mathShipQuestion) {
+int mathShip::answerquestion(int mathShipQuestion, int score) {
 	std::cout << mathEquation1;
 	if (answer == mathShipQuestion) {
-		
+		score += 1;
 		return isAlive = false;
 	}
 	else
@@ -53,15 +54,16 @@ Sprite mathShip::getSprite()
 	return mathShipSprite;
 }
 
+
 bool mathShip::outOfBounds(Vector2f mathposition) {
-	if (mathposition.x < 0) {
+	while (mathposition.x < 0) {
 		return true;
 		std::cout << "hes out";
 	}
 }
 
-void mathShip::movementMath() {
-	position.x = position.x - 0.5;
+void mathShip::movementMath(std::list<mathShip> list) {
+	position.x = position.x - movespeed - (list.size()/3);
 }
 
 void mathShip::Update() {

@@ -119,6 +119,7 @@ void gameState::game(RenderWindow& window) {
 	enteredText.setFont(font);
 	enteredText.setCharacterSize(20);
 
+	int score;
 	std::string str;
 
 	//setting enemy and main ship position
@@ -150,7 +151,7 @@ void gameState::game(RenderWindow& window) {
 					for (mathShip& ms : listMathShip) {
 						if (ms.isAlive == true) {
 							if (mainShip.position.y > ms.position.y - 20 && mainShip.position.y < ms.position.y + 20) {
-								ms.answerquestion(mainShip.answer);
+								ms.answerquestion(mainShip.answer, score);
 							}
 						}
 						
@@ -170,7 +171,6 @@ void gameState::game(RenderWindow& window) {
 			window.close();
 			break;
 		}
-		
 		
 		time1 += clock.getElapsedTime();
 
@@ -215,13 +215,10 @@ void gameState::game(RenderWindow& window) {
 		//Movement of each ship
 		for (mathShip& ms : listMathShip) {
 			if (ms.isAlive) {
-				ms.movementMath();
+				ms.movementMath(listMathShip);
 			}
 			
 		}
-			
-		
-		
 		window.display();
 
 		mainShip.Update();

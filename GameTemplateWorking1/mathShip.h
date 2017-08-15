@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <time.h>
+#include <list>
 #include <random>
 #include <sstream>
 
@@ -11,8 +12,6 @@ using namespace sf;
 
 
 class mathShip {
-private:
-	float movespeed = 0.5;
 
 public:
 
@@ -26,13 +25,14 @@ public:
 	int mathEquation2 = (rand() % 10);
 
 	int answer = mathEquation1 + mathEquation2;
-	
+
+	float movespeed = 0.5;
 
 	std::string s;
 
 	Text question;
 
-	int answerquestion(int mainShipAnswer);
+	int answerquestion(int mainShipAnswer, int score);
 
 	bool outOfBounds(Vector2f mathposition);
 	bool isAlive;
@@ -41,7 +41,7 @@ public:
 
 	Text getText();
 
-	void movementMath();
+	void movementMath(std::list<mathShip> list);
 
 	void Update();
 	
