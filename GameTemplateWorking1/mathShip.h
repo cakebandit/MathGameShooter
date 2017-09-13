@@ -34,7 +34,7 @@ public:
 
 	int answerquestion(int mainShipAnswer, int score);
 
-	bool outOfBounds(Vector2f mathposition);
+	int outOfBounds(int position);
 	bool isAlive;
 
 	Sprite getSprite();

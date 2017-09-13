@@ -11,7 +11,7 @@ class gameState {
 public:
 	
 	static int intro(RenderWindow& window);
-	static void game(RenderWindow& window);
-	static void deathscreen(RenderWindow& window);
+	static int game(RenderWindow& window);
+	static int deathscreen(RenderWindow& window);
 
 };

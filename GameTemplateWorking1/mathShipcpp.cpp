@@ -55,15 +55,14 @@ Sprite mathShip::getSprite()
 }
 
 
-bool mathShip::outOfBounds(Vector2f mathposition) {
-	while (mathposition.x < 0) {
+int mathShip::outOfBounds(int position) {
+	if (position < 0) {
 		return true;
-		std::cout << "hes out";
 	}
 }
 
 void mathShip::movementMath(std::list<mathShip> list) {
-	position.x = position.x - movespeed - (list.size()/3);
+	position.x = position.x - movespeed - (list.size()/5);
 }
 
 void mathShip::Update() {

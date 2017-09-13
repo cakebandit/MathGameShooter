@@ -2,23 +2,40 @@
 #include "mainship.h"
 #include "mathShip.h"
 #include "GameState.h"
+#include "globalVariables.h"
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <fstream>
 #include <list>
 #include <random>
 
 using namespace sf;
 
-enum state {inIntro, inGame, indeathScreen} switchstate;
+int highscoregame = 0;
+int currentscore = 0;
+commands command;
+globalVariables gloVar;
+
+enum state { inIntro, inGame, indeathScreen } switchstate;
+
+
 
 int main() {
+	commands command;
+
 	int windowWidth = 480;
 	int windowHeight = 600;
 
+	std::ofstream savefile;
+	savefile.open("Saves.txt");
+
+	//Creating Window Instance 
 	RenderWindow window(VideoMode(windowHeight, windowWidth), "Matematica infinita");
+
+	//Loop
 	while (window.isOpen()) {
-		sf::Event event;
+		Event event;
 		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
 				window.close();
@@ -28,30 +45,37 @@ int main() {
 
 		window.setFramerateLimit(60);
 		
-		if (switchstate == inGame) {
-			gameState::game(window);
-		}
-
+		//Handling the states in the main Loop
 		if (switchstate == inIntro) {
 			gameState::intro(window);
 		}
+		if (switchstate == inGame) {
+			gameState::game(window);
+		}
+		if (switchstate == indeathScreen) {
+			gameState::deathscreen(window);
+		}
+
 		
 	}
 
 }
 
+
+
+
 int gameState::intro(RenderWindow& window) {
+	//Loading Font
 	Font font;
 	font.loadFromFile("C:/Windows/Fonts/arial.ttf");
 
-	Text title;
-	Text enter;
 
-	title.setFont(font);
-	title.setCharacterSize(50);
-
-	enter.setFont(font);
-	enter.setCharacterSize(20);
+	//Loading Textures
+	Texture titletexture;
+	if (!titletexture.loadFromFile("Title screen.png")) {
+		std::cout << "didntload";
+	}
+	Sprite titlesprite(titletexture);
 
 	Texture backgroundTexture;
 	if (!backgroundTexture.loadFromFile("background.jpg")) {
@@ -59,6 +83,14 @@ int gameState::intro(RenderWindow& window) {
 	}
 	Sprite background(backgroundTexture);
 
+	Texture controlsTexture;
+	if (!controlsTexture.loadFromFile("controls.png")) {
+		std::cout << "didntload";
+	}
+	Sprite controls(controlsTexture);
+
+
+	//Event Loop
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -67,12 +99,12 @@ int gameState::intro(RenderWindow& window) {
 				break;
 			}
 		}
-		title.setString("Matematica Infinita");
-		enter.setString("Press Enter to Continue!");
-		title.setPosition(90, 100);
-		enter.setPosition(180, 200);
+		//Displaying title within the instance of the window
+		titlesprite.setScale(1.2, 1.2);
+		titlesprite.setPosition(5, 0);
+		controls.setPosition(55, 200);
 
-
+		//Handling Typing and Key Presses using Eventa
 		if (event.type == Event::TextEntered) {
 
 			if (event.text.unicode == '\r') {
@@ -81,45 +113,49 @@ int gameState::intro(RenderWindow& window) {
 			}
 		}
 
-		if (Keyboard::isKeyPressed(Keyboard::Escape)) {
-			window.close();
-			return 0;
-			break;
-		}
+		command.exit(window);
 
+		//Drawing objects
 		window.clear(Color(26, 128, 182, 255));
 
 		window.draw(background);
-		window.draw(title);
-		window.draw(enter);
+		window.draw(titlesprite);
+		window.draw(controls);
 
 		window.display();
 
+		//returning the state it is in
 		return switchstate = inIntro;
 		break;
 	}
 }
 
 
-void gameState::game(RenderWindow& window) {
+
+
+int gameState::game(RenderWindow& window) {
+	//Starting Clock
 	Clock clock;
 	Time time1;
+
+	int score = 0;
 	
-	//text on screen management
+	//Loading font
 	Font font;
 	font.loadFromFile("C:/Windows/Fonts/arial.ttf");
 
+	//Loading background textures
 	Texture backgroundTexture;
 	if (!backgroundTexture.loadFromFile("background.jpg")) {
 		std::cout << "didntload";
 	}
 	Sprite background(backgroundTexture);
 
+	//Initializing Text
+	Text scorebox;
 	Text enteredText;
-	enteredText.setFont(font);
-	enteredText.setCharacterSize(20);
-
-	int score;
+	gloVar.settingTextVarGame(scorebox, enteredText, font);
+	
 	std::string str;
 
 	//setting enemy and main ship position
@@ -127,8 +163,7 @@ void gameState::game(RenderWindow& window) {
 
 	//List of Ships that have been executed
 	std::list<mathShip> listMathShip;
-	
-	//creating a window instance
+	window.setFramerateLimit(60);
 	
 	//while the window is open, do events
 	while (window.isOpen()) {
@@ -138,54 +173,17 @@ void gameState::game(RenderWindow& window) {
 				window.close();
 				break;
 			}
-			if (event.type == Event::TextEntered) {
-				if (event.text.unicode == '\b') {
-					str.erase(str.size() - 1, 1);
-				}
-
-				else if (event.text.unicode == '\r') {
-					if (str.size() > 0) {
-						mainShip.answer = std::stoi(str);
-						str.erase(str.size() - str.size());
-					}
-					for (mathShip& ms : listMathShip) {
-						if (ms.isAlive == true) {
-							if (mainShip.position.y > ms.position.y - 20 && mainShip.position.y < ms.position.y + 20) {
-								ms.answerquestion(mainShip.answer, score);
-							}
-						}
-						
-					}
-				}
-				else if (str.size() < 5) {
-					if (event.text.unicode < 60) {
-						str += static_cast<char>(event.text.unicode);
-					}
-				}
-				enteredText.setString(str);
-			}
-
+			gloVar.textinputMethod(event, str, mainShip, listMathShip, enteredText, score);
 		}
+		//Exit command
+		command.exit(window);
 
-		if (Keyboard::isKeyPressed(Keyboard::Escape)) {
-			window.close();
-			break;
-		}
-		
+		//Getting Time
 		time1 += clock.getElapsedTime();
 
 		//spawning the ships
-		if ((rand() % 47 + 700) < time1.asSeconds()) {
-			std::cout << "meme";
-			clock.restart();
-			time1 = time1 - time1;
-
-			for (int i = 0; i < 1; i++) {
-				mathShip ms(rand() % 400);
-				listMathShip.push_front(ms);
-				i = 0;
-			}
-		}
+		gloVar.spawningMines(time1, clock, listMathShip);
+		
 
 		//colour of background
 		window.clear(Color(26, 128, 182, 255));
@@ -194,6 +192,7 @@ void gameState::game(RenderWindow& window) {
 		window.draw(background);
 		window.draw(mainShip.getPointerShape());
 		window.draw(mainShip.getSprite());
+		window.draw(scorebox);
 		for (mathShip& ms : listMathShip) {
 			if (ms.isAlive == true) {
 				ms.mathShipSprite.setTexture(ms.mathShipTexture);
@@ -202,7 +201,6 @@ void gameState::game(RenderWindow& window) {
 				window.draw(ms.getText());
 			}
 			}
-		
 		window.draw(enteredText);
 		
 		//Keyboard movements
@@ -216,22 +214,90 @@ void gameState::game(RenderWindow& window) {
 		for (mathShip& ms : listMathShip) {
 			if (ms.isAlive) {
 				ms.movementMath(listMathShip);
+				ms.outOfBounds(ms.position.x);
+				if (ms.outOfBounds(ms.position.x) == true) {
+					return switchstate = indeathScreen, currentscore = score;
+					break;
+				}
+
 			}
-			
+
 		}
+
 		window.display();
 
+		scorebox.setString("Score: " + std::to_string(score));
 		mainShip.Update();
 		for (mathShip& ms : listMathShip) {
 			if (ms.isAlive == true) {
 				ms.Update();
-				ms.outOfBounds(ms.position);
 			}
 			
 		}
-		
 	}
+	return switchstate = inGame;
+}
 
+
+
+
+int gameState::deathscreen(RenderWindow& window) {
+	Font font;
+	font.loadFromFile("C:/Windows/Fonts/arial.ttf");
+
+	Texture backgroundTexture;
+	if (!backgroundTexture.loadFromFile("background.jpg")) {
+		std::cout << "didntload";
+	}
+	Sprite background(backgroundTexture);
+
+	Texture yourdead;
+	if (!yourdead.loadFromFile("youredead.png")) {
+		std::cout << "didntload";
+	}
+	Sprite yourdeadsprite(yourdead);
+
+	Text highscore;
+
+	if (currentscore > highscoregame) {
+		highscoregame = currentscore;
+	}
+	yourdeadsprite.setScale(1.4, 1.45);
+	yourdeadsprite.setPosition(-53, 90);
+
+	highscore.setCharacterSize(20);
+	highscore.setFont(font);
+	highscore.setPosition(20, 440);
+
+	while (window.isOpen()) {
+		sf::Event event;
+		while (window.pollEvent(event)) {
+			if (event.type == sf::Event::Closed) {
+				window.close();
+				break;
+			}
+		}
+
+		if (Keyboard::isKeyPressed(Keyboard::R)) {
+			return switchstate = inGame;
+		}
+
+
+		if (Keyboard::isKeyPressed(Keyboard::Space)) {
+			return switchstate = inIntro;
+		}
+
+
+		command.exit(window);
+			
+
+		highscore.setString("High Score: " + std::to_string(highscoregame));
+		window.draw(background);
+		window.draw(yourdeadsprite);
+		window.draw(highscore);
+
+		window.display();
+	}
 }
 
 

@@ -50,7 +50,7 @@ RectangleShape mainShip::getPointerShape()
 
 
 void mainShip::moveUp() {
-	if (Keyboard::isKeyPressed(Keyboard::Up)) {
+	if (Keyboard::isKeyPressed(Keyboard::Up) || Keyboard::isKeyPressed(Keyboard::W)) {
 		if (position.y >= 5) {
 			position.y = position.y - movespeed;
 		}
@@ -60,7 +60,7 @@ void mainShip::moveUp() {
 }
 
 void mainShip::moveDown() {
-	if (Keyboard::isKeyPressed(Keyboard::Down)) {
+	if (Keyboard::isKeyPressed(Keyboard::Down) || Keyboard::isKeyPressed(Keyboard::S)) {
 		if (position.y <= 451) {
 			position.y = position.y + movespeed;
 		}

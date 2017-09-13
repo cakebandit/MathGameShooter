@@ -19,7 +19,7 @@
     <Filter Include="Source Files\Ships">
       <UniqueIdentifier>{3ecbd40f-7e7f-4cfc-bbb5-6fe0cea8bf63}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\NewFilter1">
+    <Filter Include="Source Files\Images">
       <UniqueIdentifier>{62602cd9-3d01-4717-8d09-84de8b0f5e8e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -33,7 +33,7 @@
     <ClCompile Include="mathShipcpp.cpp">
       <Filter>Source Files\Ships</Filter>
     </ClCompile>
-    <ClCompile Include="GameState.cpp">
+    <ClCompile Include="intro.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,16 +50,31 @@
     <ClInclude Include="GameState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="globalVariables.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="D:\Downloads\mine.png">
+      <Filter>Source Files\Images</Filter>
+    </Image>
+    <Image Include="spaceship2.ico">
+      <Filter>Source Files\Images</Filter>
+    </Image>
     <Image Include="D:\Downloads\spaceship2.png">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Images</Filter>
+    </Image>
+    <Image Include="Title screen.png">
+      <Filter>Source Files\Images</Filter>
     </Image>
     <Image Include="background.jpg">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Images</Filter>
     </Image>
-    <Image Include="D:\Downloads\mine.png">
-      <Filter>Source Files</Filter>
+    <Image Include="youredead.png">
+      <Filter>Source Files\Images</Filter>
+    </Image>
+    <Image Include="controls.png">
+      <Filter>Source Files\Images</Filter>
     </Image>
   </ItemGroup>
 </Project>

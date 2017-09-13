@@ -6,3 +6,14 @@
 #include "SFML\Network.hpp"
 #include "SFML\System.hpp"
 #include "SFML\Window.hpp"
+
+using namespace sf;
+
+class commands {
+public:
+	void exit(RenderWindow& window) {
+		if (Keyboard::isKeyPressed(Keyboard::Escape)) {
+			window.close();
+		}
+	}
+};
